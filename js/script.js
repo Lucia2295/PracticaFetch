@@ -19,3 +19,26 @@ function showData(dataArray) {
 }
 
 // Escribe el código necesario para realizar el fetch al archivo con los datos y mostrar los estudiantes con la función showData
+async function fetchAndShowData() {
+  try {
+      // Hacemos un fetch al archivo JSON
+      const response = await fetch("json/data.json");
+      
+      // Verificamos que la respuesta sea exitosa
+      if (!response.ok) {
+          throw new Error('Error al cargar los datos');
+      }
+      
+      // Convertimos la respuesta en un objeto JSON
+      const data = await response.json();
+      
+      // Mostramos los datos usando la función showData
+      showData(data.students);
+      
+  } catch (error) {
+      console.error('Hubo un problema con el fetch:', error);
+  }
+}
+
+// Llamada a la función para obtener y mostrar los datos
+fetchAndShowData();
